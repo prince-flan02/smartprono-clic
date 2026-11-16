@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART PRONO - VIP</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#0a0f1e;color:#fff;text-align:center}
+header{padding:30px 20px 10px}
+h1{color:#f5c518;font-size:34px;margin:5px 0}
+h2{margin:10px 0}
+.badge{background:#f5c518;color:#000;display:inline-block;padding:7px 16px;border-radius:20px;font-weight:bold;font-size:13px}
+.sub{color:#bbb}
+.card{background:#131a2e;padding:22px;border-radius:16px;max-width:450px;margin:20px auto;text-align:left}
+.center{text-align:center}
+.prono-card{background:#1e2a4a;padding:16px;border-radius:12px;margin:12px 0;border-left:5px solid #f5c518}
+.prono-card b{color:#f5c518}
+.price{font-size:30px;color:#f5c518;font-weight:bold;text-align:center}
+input{width:100%;padding:13px;margin:8px 0;border-radius:10px;border:none;background:#1e2a4a;color:#fff;font-size:15px}
+button{width:100%;padding:14px;border:none;border-radius:10px;background:#f5c518;color:#000;font-weight:bold;font-size:16px;cursor:pointer;margin-top:10px}
+.btn-green{background:#00c853;color:#fff}
+.btn-red{background:#e53935;color:#fff}
+.btn-whatsapp{background:#25D366;color:#fff}
+.btn-telegram{background:#229ED9;color:#fff}
+.btn-dark{background:#222b45;color:#fff;border:1px solid #444}
+small{color:#aaa}
+.demande{border:1px solid #333;padding:12px;border-radius:12px;margin:12px 0;background:#0f1730}
+.hidden{display:none}
+.top-admin{max-width:450px;margin:10px auto;text-align:right;padding:0 20px}
+.top-admin button{width:auto;padding:8px 14px;font-size:13px;background:#222b45;color:#fff}
+.stat{display:flex;justify-content:space-between;gap:10px;margin:15px 0}
+.stat div{background:#1e2a4a;flex:1;padding:12px;border-radius:12px}
+.stat b{font-size:20px;color:#f5c518}
+.footer{padding:20px;color:#777;font-size:13px}
+a{text-decoration:none}
+.flex-btn{display:flex;align-items:center;justify-content:center;gap:10px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>👑 SMART PRONO</h1>
+<span class="badge">VIP • 100% VALIDÉ</span>
+<p class="sub">Pronostics fiables, analysés chaque jour par notre équipe.</p>
+</header>
+
+<div class="top-admin">
+<button onclick="showAdminLogin()">⚙️ Espace Admin</button>
+</div>
+
+<div class="card">
+<div class="stat">
+<div><b>87%</b><br><small>Pronos validés</small></div>
+<div><b>500+</b><br><small>Membres VIP</small></div>
+<div><b>5.00+</b><br><small>Cote totale</small></div>
+</div>
+</div>
+
+<div class="card" id="vipPronoBox">
+<h2 class="center">🔥 PRONOS DU JOUR</h2>
+<div id="pronoList">
+<div class="prono-card">
+<b>⚽ MATCH 1</b><br>
+<span id="p1">Real Madrid gagne + Over 1.5</span><br>
+Cote : <b id="c1">1.85</b><br>
+Confiance : ⭐⭐⭐⭐⭐
+</div>
+<div class="prono-card">
+<b>⚽ MATCH 2</b><br>
+<span id="p2">PSG - Les deux équipes marquent</span><br>
+Cote : <b id="c2">1.70</b><br>
+Confiance : ⭐⭐⭐⭐
+</div>
+<div class="prono-card">
+<b>⚽ MATCH 3</b><br>
+<span id="p3">Man City gagne</span><br>
+Cote : <b id="c3">1.55</b><br>
+Confiance : ⭐⭐⭐⭐
+</div>
+</div>
+<p class="center"><small>Cote totale combinée : <b style="color:#f5c518">5.00+</b></small></p>
+</div>
+
+<div class="card" id="formBox">
+<h2 class="center">🔐 Entre le code de transaction</h2>
+<p class="center">Paye par Orange Money / Wave / MTN puis entre ton code ici pour débloquer les pronos.</p>
+<input id="nom" placeholder="Ton nom complet">
+<input id="whatsapp" placeholder="Ton WhatsApp - Ex: 07 00 00 00 00">
+<input id="codeTrans" placeholder="Code de transaction - Ex: CI123456789">
+<button onclick="envoyerDemande()">ENVOYER POUR VALIDATION</button>
+<small>Après envoi, l'Admin doit confirmer dans l'espace Admin. Une fois validé, le bot débloque automatiquement ton accès aux pronos VIP.</small>
+</div>
+
+<div class="card hidden" id="pendingBox" style="background:#ff9800;color:#fff">
+<h2 class="center">⏳ En attente de validation</h2>
+<p class="center">Ton code <b id="codeAffiche"></b> est envoyé.</p>
+<p class="center">L'Admin va vérifier ton paiement et valider. Actualise la page dans quelques minutes.</p>
+<button onclick="location.reload()" style="background:#fff">ACTUALISER LA PAGE</button>
+</div>
+
+<div class="card">
+<h2 class="center">💎 ABONNEMENT VIP</h2>
+<p class="price">5.000 FCFA / Mois</p>
+<p class="center">✅ Tous les pronos chaque jour<br>✅ Groupe WhatsApp VIP<br>✅ Support 7j/7<br>✅ Remboursé si 0 gain</p>
+<button class="btn-whatsapp" onclick="window.open('https://wa.me/2250700000000?text=Bonjour je veux rejoindre SMART PRONO VIP','_blank')">REJOINDRE SUR WHATSAPP</button>
+</div>
+
+<!-- REJOINS NOS COMMUNAUTÉS - TELEGRAM + CHAINE WHATSAPP -->
+<div class="card">
+<h2 class="center">📢 REJOINS NOS COMMUNAUTÉS</h2>
+<p class="center">Reçois les pronos, les alertes et les grosses cotes en direct.</p>
+<a href="https://t.me/Smartpronofmp" target="_blank">
+<button class="btn-telegram flex-btn"><span style="font-size:20px">✈️</span> REJOINDRE TELEGRAM</button>
+</a>
+<a href="https://whatsapp.com/channel/0029Vb9Tt8eCnA7rXgMg4L3k" target="_blank">
+<button class="btn-whatsapp flex-btn"><span style="font-size:20px">💬</span> REJOINDRE LA CHAÎNE WHATSAPP</button>
+</a>
+<p class="center"><small>Telegram pour les alertes rapides • Chaîne WhatsApp pour les pronos VIP</small></p>
+</div>
+
+<div class="card">
+<h2 class="center">🏆 POURQUOI SMART PRONO ?</h2>
+<p>✅ +87% de pronos validés<br>✅ Analyses avant chaque match<br>✅ Pas de hasard, que des stats<br>✅ Déjà +500 membres VIP<br>✅ Paiement sécurisé Orange Money / Wave / MTN</p>
+</div>
+
+<div class="card hidden" id="loginAdminBox">
+<h2 class="center">🔐 ESPACE ADMIN</h2>
+<p class="center">Réservé au patron. Entre le code d'accès.</p>
+<input type="password" id="adminPass" placeholder="Code d'accès Admin">
+<button onclick="loginAdmin()">ENTRER DANS L'ADMIN</button>
+<p id="errAdmin" style="color:#ff5252;text-align:center"></p>
+<button class="btn-dark" onclick="hideAdmin()">⬅ RETOUR AU SITE</button>
+</div>
+
+<div class="card hidden" id="adminBox">
+<h2 class="center">👑 PANEL ADMIN - SMART PRONO</h2>
+<p class="center">Bienvenue Boss. Tu valides, le bot débloque.</p>
+<h3>📝 Changer les pronos du jour</h3>
+<input id="newP1" placeholder="Prono 1 - Ex: Real gagne">
+<input id="newC1" placeholder="Cote 1 - Ex: 1.85">
+<input id="newP2" placeholder="Prono 2">
+<input id="newC2" placeholder="Cote 2">
+<input id="newP3" placeholder="Prono 3">
+<input id="newC3" placeholder="Cote 3">
+<button onclick="savePronos()">💾 SAUVEGARDER LES PRONOS</button>
+<hr style="border-color:#333">
+<h3>📩 Codes de transaction à valider</h3>
+<p><small>Quand tu cliques sur VALIDER, le bot débloque l'accès du client aux pronos.</small></p>
+<div id="listeDemandes"></div>
+<button class="btn-dark" onclick="loadDemandes()">🔄 ACTUALISER LA LISTE</button>
+<button class="btn-dark" onclick="hideAdmin()">⬅ RETOUR AU SITE</button>
+</div>
+
+<p class="footer">© 2026 SMART PRONO - Tous droits réservés<br>Le jeu doit rester un plaisir. Jouez responsable.</p>
+
+<script>
+const MOT_DE_PASSE_ADMIN = "SmartBot2026";
+function envoyerDemande(){
+  let nom=document.getElementById('nom').value.trim();
+  let wa=document.getElementById('whatsapp').value.trim();
+  let code=document.getElementById('codeTrans').value.trim();
+  if(!nom||!wa||!code){alert("Remplis ton nom, ton WhatsApp et ton code de transaction Boss !");return;}
+  let demandes=JSON.parse(localStorage.getItem('demandes')||'[]');
+  if(demandes.find(d=>d.code===code)){alert("Ce code a déjà été envoyé. Attends la validation.");return;}
+  demandes.push({nom:nom,whatsapp:wa,code:code,status:'en_attente',date:new Date().toLocaleString()});
+  localStorage.setItem('demandes',JSON.stringify(demandes));
+  localStorage.setItem('mon_code',code);
+  afficherEtat();
+}
+function afficherEtat(){
+  let monCode=localStorage.getItem('mon_code');
+  let demandes=JSON.parse(localStorage.getItem('demandes')||'[]');
+  let m=demandes.find(d=>d.code===monCode);
+  let form=document.getElementById('formBox');
+  let pending=document.getElementById('pendingBox');
+  let vip=document.getElementById('vipPronoBox');
+  if(!m){form.classList.remove('hidden');pending.classList.add('hidden');vip.classList.add('hidden');return;}
+  if(m.status==='valide'){form.classList.add('hidden');pending.classList.add('hidden');vip.classList.remove('hidden');chargerPronos();}
+  else if(m.status==='refuse'){alert("Code refusé par l'Admin. Vérifie ton code.");localStorage.removeItem('mon_code');form.classList.remove('hidden');pending.classList.add('hidden');vip.classList.add('hidden');}
+  else{form.classList.add('hidden');pending.classList.remove('hidden');vip.classList.add('hidden');document.getElementById('codeAffiche').innerText=monCode;}
+}
+function chargerPronos(){
+  let p1=localStorage.getItem('prono1'); if(p1) document.getElementById('p1').innerText=p1;
+  let c1=localStorage.getItem('cote1'); if(c1) document.getElementById('c1').innerText=c1;
+  let p2=localStorage.getItem('prono2'); if(p2) document.getElementById('p2').innerText=p2;
+  let c2=localStorage.getItem('cote2'); if(c2) document.getElementById('cote2').innerText=c2;
+  let p3=localStorage.getItem('prono3'); if(p3) document.getElementById('p3').innerText=p3;
+  let c3=localStorage.getItem('cote3'); if(c3) document.getElementById('cote3').innerText=c3;
+}
+function showAdminLogin(){document.getElementById('loginAdminBox').classList.remove('hidden');document.getElementById('loginAdminBox').scrollIntoView({behavior:'smooth'});}
+function hideAdmin(){document.getElementById('loginAdminBox').classList.add('hidden');document.getElementById('adminBox').classList.add('hidden');}
+function loginAdmin(){
+  let pass=document.getElementById('adminPass').value;
+  if(pass===MOT_DE_PASSE_ADMIN){document.getElementById('loginAdminBox').classList.add('hidden');document.getElementById('adminBox').classList.remove('hidden');document.getElementById('errAdmin').innerText="";loadDemandes();}
+  else{document.getElementById('errAdmin').innerText="Code d'accès incorrect.";}
+}
+function savePronos(){
+  localStorage.setItem('prono1',document.getElementById('newP1').value||document.getElementById('p1').innerText);
+  localStorage.setItem('cote1',document.getElementById('newC1').value||document.getElementById('c1').innerText);
+  localStorage.setItem('prono2',document.getElementById('newP2').value||document.getElementById('p2').innerText);
+  localStorage.setItem('cote2',document.getElementById('newC2').value||document.getElementById('cote2').innerText);
+  localStorage.setItem('prono3',document.getElementById('newP3').value||document.getElementById('p3').innerText);
+  localStorage.setItem('cote3',document.getElementById('newC3').value||document.getElementById('cote3').innerText);
+  alert("Pronos sauvegardés Boss !");chargerPronos();
+}
+function loadDemandes(){
+  let d=JSON.parse(localStorage.getItem('demandes')||'[]');
+  let html="";
+  if(d.length===0) html="<p>Aucune demande pour le moment.</p>";
+  d.forEach((x,i)=>{
+    html+=`<div class="demande"><b>${x.nom}</b> - ${x.whatsapp}<br>Code: <b>${x.code}</b><br>Statut: <b>${x.status}</b><br><small>${x.date}</small><br><button class="btn-green" onclick="validerDemande(${i})">✅ VALIDER - BOT DÉBLOQUE</button><button class="btn-red" onclick="refuserDemande(${i})">❌ REFUSER</button></div>`;
+  });
+  document.getElementById('listeDemandes').innerHTML=html;
+}
+function validerDemande(i){let d=JSON.parse(localStorage.getItem('demandes')||'[]');d[i].status='valide';localStorage.setItem('demandes',JSON.stringify(d));alert("Validé ! Le bot a débloqué l'accès pour "+d[i].nom);loadDemandes();}
+function refuserDemande(i){let d=JSON.parse(localStorage.getItem('demandes')||'[]');d[i].status='refuse';localStorage.setItem('demandes',JSON.stringify(d));loadDemandes();}
+afficherEtat();
+chargerPronos();
+</script>
+</body>
+</html>
