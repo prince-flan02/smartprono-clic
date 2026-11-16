@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prince-flan02.github.io/smartprono-clic/sitemap.xml
